@@ -17,18 +17,18 @@ from textblob.sentiments import NaiveBayesAnalyzer # Optional - UNUSED
 passage1 = open("passage01.txt", "r").read() 
 passage2 = open("passage02.txt", "r").read()
 
-# Answers to the first passage from College Board AP English Exam
+# Answers to the first passage from College Board AP English Exam - Correct answer is A) Evenhanded and Logical
 passage1_answers = ["Evenhanded and logical",
            "Whimsical and poetic",
            "Imprecise and accusative",
            "Sarcastic and biting",
            "Paranoid and skeptical"]
-# Answers to the second passage from College Board AP English Exam
-passage2_answers = ["He was sardonic",
-                    "He was apathetic",
-                    "He was offended",
-                    "He was critical",
-                    "He was earnest"]
+# Answers to the second passage from College Board AP English Exam - Correct anser is E) Earnest
+passage2_answers = ["sardonic",
+                    "apathetic",
+                    "offended",
+                    "critical",
+                    "earnest"]
 
 def evaluatePassage(passage, answers):
 	# Function that will preform sentiment analysis on a passage & its answers
