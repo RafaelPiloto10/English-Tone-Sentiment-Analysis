@@ -16,23 +16,30 @@ passage2_answers = ["He was sardonic",
                     "He was critical",
                     "He was earnest"]
 
-blob1_answers = [textblob.TextBlob(x) for x in passage1_answers]
-blob2_answers = [textblob.TextBlob(x) for x in passage2_answers]
+def evaluatePassage(passage, answers):
 
-blob1 = textblob.TextBlob(passage1) #, analyzer=NaiveBayesAnalyzer())
-blob2 = textblob.TextBlob(passage2)
+	blob = textblob.TextBlob(passage)
+	blob_answers = [textblob.TextBlob(x) for x in answers]
+	sent = blob.sentiment
 
-sent1 = blob1.sentiment
-sent2 = blob2.sentiment
-print("\nPassage01 :")
-for answer in blob1_answers:
-    print("{} - {}".format(answer, answer.sentiment))
-print("Passage01 has a sentiment polarity of: {} ".format(sent1))
+	print("Passage possible Tone answers:")
 
-print("\n\nPassage02 :")
-for answer in blob2_answers:
-    print("{} - {}".format(answer, answer.sentiment))
+	lowest = None
+	greatest = None
 
-print("Passage02 has a sentiment polarity of: {} ".format(sent2))
+	for answer in blob_answers:
+		print("{} - {}".format(answer, answer.sentiment))
+		if greatest and sent.polarity < answer.sentiment.polarity < greatest.sentiment.polarity:
+			greatest = answer
+		elif answer.sentiment.polarity > sent.polarity:
+			greatest = answer
+		if lowest and sent.polarity > answer.sentiment.polarity > lowest.sentiment.polarity:
+			lowest = answer
+		elif answer.sentiment.polarity < sent.polarity:
+			lowest = answer
+		
+	print("Passage has a sentiment polarity of: {} ".format(sent), end="\n\n")
+	print("The Analysis best calculates '{}' and '{}' to be the best possible answers".format(lowest, greatest), end = "\n\n")
 
+evaluatePassage(passage1, passage1_answers)
 
