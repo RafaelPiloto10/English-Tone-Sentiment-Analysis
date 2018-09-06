@@ -10,7 +10,13 @@
 
 
 import textblob
-from textblob.sentiments import NaiveBayesAnalyzer # Optional - UNUSED
+# from textblob.sentiments import NaiveBayesAnalyzer # Optional - UNUSED
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-p", "--passage", help="Enter an article to evaluate and its answers using the -a or --answer.")
+parser.add_argument("-a", "--answers", help="Enter the answers to the custom passage provided.")
+args = parser.parse_args()
 
 # Open passages
 
@@ -55,8 +61,25 @@ def evaluatePassage(passage, answers):
 		elif answer.sentiment.polarity < sent.polarity:
 			lowest = answer # No other answer previously recorded. Set the first lowest one
 		
-	print("Passage has a sentiment polarity of: {} ".format(sent), end="\n\n")
-	print("The Analysis best calculates '{}' and '{}' to be the best possible answers".format(lowest, greatest), end = "\n\n")
+	print("\nPassage has a sentiment polarity of: {} ".format(sent), end="\n\n")
+	print("The Analysis best calculates '{}' and '{}' to be the best possible answers. Refer to the word's polarity for clarification and confirmation".format(lowest, greatest), end = "\n\n")
 
-evaluatePassage(passage1, passage1_answers) # Adjust based on passage and answers
+if __name__ == "__main__":
+	if args.passage and args.answers:
+		passage3 = str(args.passage)
+		passage3_answers = str(args.answers).split(",")
+		
+		if not passage3_answers:
+			print("Please provide answers for the passage by using this format: 'answer,answer,answer,answer'")
+			quit()	
+		
+		evaluatePassage(passage3, passage3_answers)
 
+	elif args.passage and not args.answers:
+		print("Please provide answers for the passage using the -a or --answers arugment")
+
+	elif not args.passage and args.answers:
+		print("Please provide a passage for the answers using the -p or --passage argument.")
+
+	else:
+		evaluatePassage(passage1, passage1_answers)
