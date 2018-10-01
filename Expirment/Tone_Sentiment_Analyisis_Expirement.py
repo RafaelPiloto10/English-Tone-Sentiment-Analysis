@@ -4,7 +4,13 @@
 	Sentiment Analyisis Experiement
 		- I wanted to create a program that will try to predict the answer to Tone / Attitude English Questions
 		  using sentiment Analysis
-	Uses TextBlob
+	
+	FUNCTIONALITY:
+		Using the CLI run the file using python3 Tone_Sentiment_Analyisis_Expirement.py -p (directory to article / passage) -a "(possible tone words split with a comma BUT NO SPACE)"
+
+	
+	DEPENDENCIES:
+		TextBlob
 
 """
 
@@ -14,7 +20,7 @@ import textblob
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-p", "--passage", help="Enter an article to evaluate and its answers using the -a or --answer.")
+parser.add_argument("-p", "--passage", help="Enter an article to evaluate and its answers using the -a or --answers.")
 parser.add_argument("-a", "--answers", help="Enter the answers to the custom passage provided.")
 args = parser.parse_args()
 
