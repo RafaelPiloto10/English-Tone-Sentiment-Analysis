@@ -47,8 +47,8 @@ sub[1].xaxis.set_major_locator(plticker.MultipleLocator(base=5))
 
 # plt.savefig("analysis.png")
 print("""
-Completed in {:.02f}s. Total lines analyzed: {}.\n
+Completed in {:.02f}s. Total lines analyzed: {}.
 Lines with canceling polarity: {}.
-\nTotal lines with polarity: {}.""".format(time.time() - start, len(set(lines)), polarityEqualsZero, len(set(lines)) - polarityEqualsZero))
+Total lines with polarity: {}.""".format(time.time() - start, len(set(lines)), polarityEqualsZero, len(set(lines)) - polarityEqualsZero))
 
 plt.show()
